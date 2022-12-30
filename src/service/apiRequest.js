@@ -1,34 +1,39 @@
-export default class ApiService {
-  _apiBase = "https://api.themoviedb.org/3";
+const ApiService = () => {
+  const _apiBase =
+    "https://api.themoviedb.org/3/search/movie?api_key=1fb573444dbb7bcecf932088d33fa5db&language=RU-ru&query='return'";
 
-  async getResource(url) {
-    const res = await fetch(`${this._apiBase}${url}`);
+  return fetch(`${_apiBase}`).then((res) => res.json());
 
-    if (!res.ok) {
-      throw new Error(`Ошибка ${res.status}`);
-    }
-    return await res.json();
-  }
+  // if (!res.ok) {
+  //   throw new Error(`Ошибка ${res.status}`);
+  // }
+  // return await res.json();
 
-  async getAllMovies() {
-    const res = await this.getResource(
-      `//discover/movie?api_key=1fb573444dbb7bcecf932088d33fa5db`
-    );
-    return res.results;
-  }
+  // async getAllMovies() {
+  //   // const res = await this.getResource(
+  //   //   `//discover/movie?api_key=1fb573444dbb7bcecf932088d33fa5db`
+  //   // );
+  //   return res.results;
+  // }
 
-  getSpecificMovie(id) {
-    return this.getResource(
-      `/movie/${id}?api_key=1fb573444dbb7bcecf932088d33fa5db`
-    );
-  }
-}
+  // getSpecificMovie(id) {
+  //   return this.getResource(
+  //     `/movie/${id}?api_key=1fb573444dbb7bcecf932088d33fa5db`
+  //   );
+  // }
+};
+
+export default ApiService;
 
 // const api = new ApiService();
 
+// api.getAllMovies().then((body) => {
+//   console.log(body);
+// });
+
 // api.getAllMovies().then((movies) => {
 //   movies.forEach((i) => {
-//     console.log(i.original_title);
+//     console.log(i.original_title, i.release_date, i.overview);
 //   });
 // });
 
