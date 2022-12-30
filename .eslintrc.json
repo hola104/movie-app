@@ -25,6 +25,7 @@
     "quotes": 0,
     "semi": 0,
     "no-console": "off",
+    "camelcase":"off",
     "no-return-await": "off",
     "arrow-body-style": "off",
     "class-methods-use-this":"off",

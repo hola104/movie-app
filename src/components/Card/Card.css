@@ -1,0 +1,76 @@
+.card {
+  width: 450px;
+  overflow: hidden;
+  padding: 1em;
+  display: flex;
+  margin: 1em;
+  transition-duration: 0.1s;
+  box-shadow: 3px 3px 7px 3px rgb(0 0 0 / 10%);
+}
+
+.poster {
+  box-sizing: border-box;
+  max-width: 200px;
+  max-height: 300px;
+  transition-duration: 0.5s;
+}
+
+.poster:hover {
+  transition-duration: 0.3s;
+  scale: 1.03;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.title:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.data-of-release {
+  color: #827e7e;
+  margin-bottom: 8px;
+  font-size: 12px;
+  cursor: default;
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  height: 281px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: -16px;
+  position: relative;
+  width: 65%;
+}
+.overview {
+  font-size: 12px;
+  cursor: default;
+}
+@media (max-width: 500px) {
+  .card {
+    width: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .movie-info {
+    width: 100%;
+    margin-right: 20px;
+    align-items: center;
+  }
+  .title {
+    padding-top: 10px;
+  }
+}
+
+/* @media (max-width: 1044px) {
+  .card {
+    width: auto;
+    margin-right: 25px;
+  }
+} */
