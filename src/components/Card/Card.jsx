@@ -11,7 +11,7 @@ export default class Card extends Component {
   mainText = (text) => text.split(" ").slice(0, 50).join(" ");
 
   render() {
-    const { id, poster_path, title, release_date, overview } = this.props;
+    const { poster_path, title, release_date, overview } = this.props;
     const availabilityPoster = `${this._imgPath}${poster_path}`;
     return (
       <li className="card-container">
@@ -26,6 +26,11 @@ export default class Card extends Component {
             <div className="data-of-release">
               {format(new Date(release_date), "PPP")}
             </div>
+            <ul className="genre-list">
+              <li className="genre-item">Action</li>
+              <li className="genre-item">Adventure</li>
+              <li className="genre-item">Family</li>
+            </ul>
             <div className="overview">{this.mainText(overview)}...</div>
           </div>
         </div>
