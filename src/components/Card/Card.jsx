@@ -31,7 +31,7 @@ export default class Card extends Component {
               <li className="genre-item">Adventure</li>
               <li className="genre-item">Family</li>
             </ul>
-            <div className="overview">{this.mainText(overview)}...</div>
+            <div className="overview">{this.mainText(overview)}..</div>
           </div>
         </div>
       </li>
