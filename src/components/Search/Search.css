@@ -1,0 +1,19 @@
+.search-input {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 16px;
+  padding-left: 10px;
+}
+
+/* .search-input:focus {
+  border: none;
+} */
+.search-form {
+  padding: 0 38px 10px 40px;
+}

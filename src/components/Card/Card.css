@@ -3,7 +3,7 @@
   overflow: hidden;
   display: flex;
   margin: 1em;
-  transition-duration: 0.1s;
+  transition-duration: 0.5s;
   box-shadow: 3px 3px 7px 3px rgb(0 0 0 / 10%);
 }
 
@@ -21,7 +21,7 @@
 }
 
 .title {
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .title:hover {

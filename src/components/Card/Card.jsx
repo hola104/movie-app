@@ -10,6 +10,13 @@ export default class Card extends Component {
 
   mainText = (text) => text.split(" ").slice(0, 50).join(" ");
 
+  releaseData = (release_date) => {
+    if (release_date) {
+      return format(new Date(release_date), "PPP");
+    }
+    return "Release date unknown";
+  };
+
   render() {
     const { poster_path, title, release_date, overview } = this.props;
     const availabilityPoster = `${this._imgPath}${poster_path}`;
@@ -24,7 +31,8 @@ export default class Card extends Component {
           <div className="movie-info">
             <h2 className="title">{title}</h2>
             <div className="data-of-release">
-              {format(new Date(release_date), "PPP")}
+              {this.releaseData(release_date)}
+              {/* {format(new Date(release_date), "PPP")} */}
             </div>
             <ul className="genre-list">
               <li className="genre-item">Action</li>
