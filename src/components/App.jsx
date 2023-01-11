@@ -3,7 +3,7 @@ import { Pagination } from "antd";
 
 import "./App.css";
 import apiService from "../service/apiRequest";
-import apiDiscover from "../service/apiDiscover";
+// import apiDiscover from "../service/apiDiscover";
 
 import MoviesList from "./MovieList/MovieList";
 // import Loader from "./Loader/Loader";
@@ -12,58 +12,68 @@ import Search from "./Search/Search";
 export default class App extends Component {
   state = {
     films: [],
-    loading: true,
+    loading: false,
     value: "",
     totalPage: null,
     currentPage: 1,
+    searchRequest: "",
   };
 
-  componentDidMount() {
-    apiDiscover().then((movies) => {
-      this.setState({
-        films: movies.results,
-        loading: false,
-        // currentPage: pageNumber,
-        totalPage: movies.total_pages,
-      });
-    });
-  }
+  // componentDidMount(page) {
+  //   apiDiscover().then((movies) => {
+  //     this.setState({
+  //       films: movies.results,
+  //       loading: false,
+  //       totalPage: movies.total_pages,
+  //       currentPage: page,
+  //     });
+  //   });
+  // }
 
   searchMovie = (value) => {
+    this.setState(() => ({ loading: true }));
     apiService(value).then((movies) => {
-      this.setState({
+      this.setState(() => ({
         films: movies.results,
         loading: false,
         totalPage: movies.total_pages,
-        // currentPage: movies.page,
-      });
+        currentPage: 1,
+      }));
     });
   };
 
-  nextPage = (pageNumber) => {
-    apiService(pageNumber).then((movies) => {
-      this.setState({
-        movies: movies.results,
-        currentPage: pageNumber,
-      });
+  nextPage = (value, page) => {
+    this.setState(() => ({ loading: true }));
+    apiService(value, page).then((movies) => {
+      this.setState(() => ({
+        films: movies.results,
+        totalPage: movies.total_pages,
+        currentPage: movies.page,
+        loading: false,
+      }));
     });
+  };
+
+  searchToState = (inputText) => {
+    this.setState({ searchRequest: inputText });
   };
 
   render() {
-    const { films, loading, currentPage, totalPage } = this.state;
-
-    // if (loading) {
-    //   return <Loader />;
-    // }
+    const { films, loading, currentPage, totalPage, searchRequest } =
+      this.state;
 
     return (
       <div className="movieApp">
-        <Search searchMovie={this.searchMovie} />
-        <MoviesList films={films} />
+        <Search
+          searchMovie={this.searchMovie}
+          searchToState={this.searchToState}
+        />
+        <MoviesList films={films} loading={loading} />
         <Pagination
+          defaultCurrent={1}
           current={currentPage}
-          onChange={this.nextPage}
-          total={totalPage}
+          total={totalPage * 20}
+          onChange={(value) => this.nextPage(searchRequest, value)}
           hideOnSinglePage
           pageSize={20}
           showSizeChanger={false}

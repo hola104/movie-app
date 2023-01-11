@@ -12,6 +12,12 @@
   justify-content: center;
 }
 
+.loader-spinner {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px;
+}
+
 body {
   background-color: #f7f7f7;
   display: flex;

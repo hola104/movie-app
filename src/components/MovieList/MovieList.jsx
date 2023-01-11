@@ -2,11 +2,20 @@ import React, { Component } from "react";
 
 import Card from "../Card/Card";
 import Warning from "../Warning/Warning";
+import Loader from "../Loader/Loader";
 import "./MovieList.css";
 
 export default class MovieList extends Component {
   render() {
-    const { films } = this.props;
+    const { films, loading } = this.props;
+
+    if (loading) {
+      return (
+        <div className="loader-spinner">
+          <Loader />
+        </div>
+      );
+    }
 
     if (films) {
       const filmsList = films.map((film) => {
@@ -15,6 +24,6 @@ export default class MovieList extends Component {
       });
       return <ul className="cardList">{filmsList}</ul>;
     }
-    // return <Warning />;
+    return <Warning />;
   }
 }

@@ -5,7 +5,8 @@ import "./Search.css";
 
 export default class Search extends Component {
   onLabelChange = debounce((event) => {
-    const { searchMovie } = this.props;
+    const { searchMovie, searchToState } = this.props;
+    searchToState(event.target.value);
     searchMovie(event.target.value);
   }, 700);
 
