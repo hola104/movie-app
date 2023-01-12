@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Pagination } from "antd";
+import { Alert, Space, Pagination } from "antd";
+import { Offline, Online } from "react-detect-offline";
 
 import "./App.css";
 import apiService from "../service/apiRequest";
@@ -63,22 +64,42 @@ export default class App extends Component {
       this.state;
 
     return (
-      <div className="movieApp">
-        <Search
-          searchMovie={this.searchMovie}
-          searchToState={this.searchToState}
-        />
-        <MoviesList films={films} loading={loading} />
-        <Pagination
-          defaultCurrent={1}
-          current={currentPage}
-          total={totalPage * 20}
-          onChange={(value) => this.nextPage(searchRequest, value)}
-          hideOnSinglePage
-          pageSize={20}
-          showSizeChanger={false}
-        />
-      </div>
+      <>
+        <Online>
+          <div className="movieApp">
+            <Search
+              searchMovie={this.searchMovie}
+              searchToState={this.searchToState}
+            />
+            <MoviesList films={films} loading={loading} />
+
+            <Pagination
+              defaultCurrent={1}
+              current={currentPage}
+              total={totalPage * 20}
+              onChange={(value) => this.nextPage(searchRequest, value)}
+              hideOnSinglePage
+              pageSize={20}
+              showSizeChanger={false}
+            />
+          </div>
+        </Online>
+        <Offline>
+          <Space
+            direction="vertical"
+            style={{
+              width: "100%",
+            }}
+          >
+            <Alert
+              message="Warning!"
+              description="No internet connection..."
+              type="error"
+              showIcon
+            />
+          </Space>
+        </Offline>
+      </>
     );
   }
 }
