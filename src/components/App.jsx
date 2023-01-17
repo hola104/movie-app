@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Alert, Space, Pagination } from "antd";
+import { Tabs, Alert, Space, Pagination } from "antd";
 import { Offline, Online } from "react-detect-offline";
 
 import "./App.css";
 import apiService from "../service/apiRequest";
+import guestSessionRequest from "../service/guestSession";
 // import apiDiscover from "../service/apiDiscover";
 
 import MoviesList from "./MovieList/MovieList";
@@ -30,6 +31,13 @@ export default class App extends Component {
   //     });
   //   });
   // }
+
+  componentDidMount() {
+    guestSessionRequest().then((guestSession) => {
+      !localStorage.getItem("guest") &&
+        localStorage.setItem("guest", `${guestSession.guest_session_id}`);
+    });
+  }
 
   searchMovie = (value) => {
     this.setState(() => ({ loading: true }));
@@ -64,42 +72,64 @@ export default class App extends Component {
       this.state;
 
     return (
-      <>
-        <Online>
-          <div className="movieApp">
-            <Search
-              searchMovie={this.searchMovie}
-              searchToState={this.searchToState}
-            />
-            <MoviesList films={films} loading={loading} />
+      <Tabs
+        centered
+        defaultActiveKey="1"
+        onChange={this.onChangeTabs}
+        items={[
+          {
+            label: "Search",
+            key: "1",
+            children: (
+              <>
+                <Online>
+                  <div className="movieApp">
+                    <Search
+                      searchMovie={this.searchMovie}
+                      searchToState={this.searchToState}
+                    />
+                    <MoviesList films={films} loading={loading} />
 
-            <Pagination
-              defaultCurrent={1}
-              current={currentPage}
-              total={totalPage * 20}
-              onChange={(value) => this.nextPage(searchRequest, value)}
-              hideOnSinglePage
-              pageSize={20}
-              showSizeChanger={false}
-            />
-          </div>
-        </Online>
-        <Offline>
-          <Space
-            direction="vertical"
-            style={{
-              width: "100%",
-            }}
-          >
-            <Alert
-              message="Warning!"
-              description="No internet connection..."
-              type="error"
-              showIcon
-            />
-          </Space>
-        </Offline>
-      </>
+                    <Pagination
+                      defaultCurrent={1}
+                      current={currentPage}
+                      total={totalPage * 20}
+                      onChange={(value) => this.nextPage(searchRequest, value)}
+                      hideOnSinglePage
+                      pageSize={20}
+                      showSizeChanger={false}
+                    />
+                  </div>
+                </Online>
+                <Offline>
+                  <Space
+                    direction="vertical"
+                    style={{
+                      width: "100%",
+                    }}
+                  >
+                    <Alert
+                      message="Warning!"
+                      description="No internet connection..."
+                      type="error"
+                      showIcon
+                    />
+                  </Space>
+                </Offline>
+              </>
+            ),
+          },
+          {
+            label: "Rated",
+            key: "2",
+            children: (
+              <div className="movies-app">
+                <p>111</p>
+              </div>
+            ),
+          },
+        ]}
+      />
     );
   }
 }

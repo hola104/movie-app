@@ -31,6 +31,7 @@
     "class-methods-use-this":"off",
     "consistent-return":"off",
     "no-underscore-dangle":"off",
+    "no-unused-expressions": "off",
     "lines-between-class-members":"off",
     "no-unused-vars": "warn",
     "react/state-in-constructor": "off",
@@ -41,6 +42,7 @@
     "react/prefer-stateless-function": "off",
     "react/jsx-pascal-case": 2,
     "react/function-component-definition": "off",
+    
     "react/jsx-boolean-value": 2,
     "react/jsx-closing-bracket-location": 2,
     "react/self-closing-comp": [
