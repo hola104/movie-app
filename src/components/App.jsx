@@ -5,11 +5,13 @@ import { Offline, Online } from "react-detect-offline";
 import "./App.css";
 import apiService from "../service/apiRequest";
 import guestSessionRequest from "../service/guestSession";
+import genresRequest from "../service/genresRequest";
 // import apiDiscover from "../service/apiDiscover";
 
 import MoviesList from "./MovieList/MovieList";
 // import Loader from "./Loader/Loader";
 import Search from "./Search/Search";
+import { Provider } from "./GenresContext/genresContext";
 
 export default class App extends Component {
   state = {
@@ -33,6 +35,9 @@ export default class App extends Component {
   // }
 
   componentDidMount() {
+    genresRequest().then((genresMovies) =>
+      this.setState({ genresMovies: genresMovies.genres })
+    );
     guestSessionRequest().then((guestSession) => {
       !localStorage.getItem("guest") &&
         localStorage.setItem("guest", `${guestSession.guest_session_id}`);
@@ -68,8 +73,14 @@ export default class App extends Component {
   };
 
   render() {
-    const { films, loading, currentPage, totalPage, searchRequest } =
-      this.state;
+    const {
+      films,
+      loading,
+      currentPage,
+      totalPage,
+      searchRequest,
+      genresMovies,
+    } = this.state;
 
     return (
       <Tabs
@@ -83,23 +94,27 @@ export default class App extends Component {
             children: (
               <>
                 <Online>
-                  <div className="movieApp">
-                    <Search
-                      searchMovie={this.searchMovie}
-                      searchToState={this.searchToState}
-                    />
-                    <MoviesList films={films} loading={loading} />
+                  <Provider value={genresMovies}>
+                    <div className="movieApp">
+                      <Search
+                        searchMovie={this.searchMovie}
+                        searchToState={this.searchToState}
+                      />
+                      <MoviesList films={films} loading={loading} />
 
-                    <Pagination
-                      defaultCurrent={1}
-                      current={currentPage}
-                      total={totalPage * 20}
-                      onChange={(value) => this.nextPage(searchRequest, value)}
-                      hideOnSinglePage
-                      pageSize={20}
-                      showSizeChanger={false}
-                    />
-                  </div>
+                      <Pagination
+                        defaultCurrent={1}
+                        current={currentPage}
+                        total={totalPage * 20}
+                        onChange={(value) =>
+                          this.nextPage(searchRequest, value)
+                        }
+                        hideOnSinglePage
+                        pageSize={20}
+                        showSizeChanger={false}
+                      />
+                    </div>
+                  </Provider>
                 </Online>
                 <Offline>
                   <Space

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { format } from "date-fns";
 
+import Genre from "../Genre/Genre";
+
+import Image from "./noposter.jpg";
 import "./Card.css";
 
 export default class Card extends Component {
@@ -18,7 +21,8 @@ export default class Card extends Component {
   };
 
   render() {
-    const { poster_path, title, release_date, overview } = this.props;
+    const { id, poster_path, title, genre_ids, release_date, overview } =
+      this.props;
     const availabilityPoster = `${this._imgPath}${poster_path}`;
     return (
       <li className="card-container">
@@ -34,10 +38,9 @@ export default class Card extends Component {
               {this.releaseData(release_date)}
               {/* {format(new Date(release_date), "PPP")} */}
             </div>
-            <ul className="genre-list">
-              <li className="genre-item">Action</li>
-              <li className="genre-item">Adventure</li>
-              <li className="genre-item">Family</li>
+
+            <ul className="category-list">
+              <Genre genre_ids={genre_ids} key={id} />
             </ul>
             <div className="overview">{this.mainText(overview)}..</div>
           </div>
