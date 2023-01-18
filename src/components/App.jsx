@@ -11,7 +11,7 @@ import getRequest from "../service/getRequest";
 import MoviesList from "./MovieList/MovieList";
 import Search from "./Search/Search";
 import { Provider } from "./GenresContext/genresContext";
-import Warning from "./Warning/Warning";
+// import Warning from "./Warning/Warning";
 
 // import apiDiscover from "../service/apiDiscover";
 export default class App extends Component {
