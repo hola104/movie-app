@@ -21,6 +21,19 @@ export default class Card extends Component {
     return "Release date unknown";
   };
 
+  reitingColor = (vote_average) => {
+    if (vote_average <= 3) {
+      return { borderColor: "#E90000" };
+    }
+    if (vote_average <= 5) {
+      return { borderColor: "#E97E00" };
+    }
+    if (vote_average <= 7) {
+      return { borderColor: "#E9D100" };
+    }
+    return { borderColor: "#66E900" };
+  };
+
   render() {
     const {
       id,
@@ -30,6 +43,7 @@ export default class Card extends Component {
       release_date,
       overview,
       rating,
+      vote_average,
     } = this.props;
     const availabilityPoster = `${this._imgPath}${poster_path}`;
     return (
@@ -42,6 +56,9 @@ export default class Card extends Component {
           />
           <div className="movie-info">
             <h2 className="title">{title}</h2>
+            <div className="reiting" style={this.reitingColor(vote_average)}>
+              <span>{Math.round(vote_average)}</span>
+            </div>
             <div className="data-of-release">
               {this.releaseData(release_date)}
               {/* {format(new Date(release_date), "PPP")} */}

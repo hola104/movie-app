@@ -12,8 +12,6 @@ import MoviesList from "./MovieList/MovieList";
 import Search from "./Search/Search";
 import { Provider } from "./GenresContext/genresContext";
 
-// const Movies = React.lazy(() => import("./Movies/Movies"));
-
 // import apiDiscover from "../service/apiDiscover";
 export default class App extends Component {
   state = {
