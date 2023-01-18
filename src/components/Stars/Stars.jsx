@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Rate } from "antd";
 import "./Stars.css";
 
-import postRequest from "../../service/guestSession";
+import postRequest from "../../service/postRequest";
 
 export default class Stars extends Component {
   state = {

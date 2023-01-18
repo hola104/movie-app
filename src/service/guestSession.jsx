@@ -7,8 +7,7 @@ const guestSessionRequest = () => {
   try {
     return fetch(_url).then((response) => response.json());
   } catch (error) {
-    console.log("ошибка запроса id гостевой сессии ", error);
-    // eslint-disable-next-line no-alert
+    console.log("ошибка гостевой сессии ", error);
     alert(`Проверте подключение к vpn
     ${error}`);
   }

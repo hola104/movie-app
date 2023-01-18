@@ -4,15 +4,17 @@ import { Offline, Online } from "react-detect-offline";
 
 import "./App.css";
 import apiService from "../service/apiRequest";
-import guestSessionRequest from "../service/guestSession";
 import genresRequest from "../service/genresRequest";
-// import apiDiscover from "../service/apiDiscover";
+import guestSessionRequest from "../service/guestSession";
+import getRequest from "../service/getRequest";
 
 import MoviesList from "./MovieList/MovieList";
-// import Loader from "./Loader/Loader";
 import Search from "./Search/Search";
 import { Provider } from "./GenresContext/genresContext";
 
+// const Movies = React.lazy(() => import("./Movies/Movies"));
+
+// import apiDiscover from "../service/apiDiscover";
 export default class App extends Component {
   state = {
     films: [],
@@ -43,6 +45,14 @@ export default class App extends Component {
         localStorage.setItem("guest", `${guestSession.guest_session_id}`);
     });
   }
+
+  onChangeTabs = () => {
+    getRequest().then((dataRate) => {
+      this.setState({
+        ratedMovies: dataRate.results,
+      });
+    });
+  };
 
   searchMovie = (value) => {
     this.setState(() => ({ loading: true }));
@@ -80,6 +90,7 @@ export default class App extends Component {
       totalPage,
       searchRequest,
       genresMovies,
+      ratedMovies,
     } = this.state;
 
     return (
@@ -138,9 +149,11 @@ export default class App extends Component {
             label: "Rated",
             key: "2",
             children: (
-              <div className="movies-app">
-                <p>111</p>
-              </div>
+              <Provider value={genresMovies}>
+                <div className="movies-app">
+                  <MoviesList films={ratedMovies} loading={loading} />
+                </div>
+              </Provider>
             ),
           },
         ]}
