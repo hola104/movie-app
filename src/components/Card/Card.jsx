@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { format } from "date-fns";
 
 import Genre from "../Genre/Genre";
+import Stars from "../Stars/Stars";
 
 import Image from "./noposter.jpg";
 import "./Card.css";
@@ -11,7 +12,7 @@ export default class Card extends Component {
   posterPath = (poster_path, availabilityPoster) =>
     poster_path === null ? Image : availabilityPoster;
 
-  mainText = (text) => text.split(" ").slice(0, 50).join(" ");
+  mainText = (text) => text.split(" ").slice(0, 29).join(" ");
 
   releaseData = (release_date) => {
     if (release_date) {
@@ -21,8 +22,15 @@ export default class Card extends Component {
   };
 
   render() {
-    const { id, poster_path, title, genre_ids, release_date, overview } =
-      this.props;
+    const {
+      id,
+      poster_path,
+      title,
+      genre_ids,
+      release_date,
+      overview,
+      rating,
+    } = this.props;
     const availabilityPoster = `${this._imgPath}${poster_path}`;
     return (
       <li className="card-container">
@@ -43,6 +51,7 @@ export default class Card extends Component {
               <Genre genre_ids={genre_ids} key={id} />
             </ul>
             <div className="overview">{this.mainText(overview)}..</div>
+            <Stars id={id} rating={rating} />
           </div>
         </div>
       </li>

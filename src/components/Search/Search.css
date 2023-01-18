@@ -3,7 +3,7 @@
   justify-content: space-between;
   width: 100%;
   height: 30px;
-  border: 1px solid #d9d9d9;
+
   border-radius: 2px;
   box-sizing: border-box;
   color: rgba(0, 0, 0, 0.85);
@@ -12,9 +12,10 @@
   transition-duration: 0.4s;
 }
 
-/* .search-input:focus {
-  border: none;
-} */
 .search-form {
   padding: 0 38px 10px 40px;
+}
+
+:where(.css-dev-only-do-not-override-1jyprxx).ant-input {
+  padding: 3px 0px 3px 5px;
 }

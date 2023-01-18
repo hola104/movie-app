@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { debounce } from "lodash";
+import { Input } from "antd";
 
 import "./Search.css";
 
@@ -13,14 +14,15 @@ export default class Search extends Component {
   render() {
     return (
       <form className="search-form">
-        <label className="search-label">
-          <input
-            type="text"
-            className="search-input"
-            placeholder="Type to search..."
-            onChange={this.onLabelChange}
-          />
-        </label>
+        {/* <label className="search-label"> */}
+        <Input
+          type="search"
+          className="search-input"
+          placeholder="Type to search..."
+          onChange={this.onLabelChange}
+          autoFocus
+        />
+        {/* </label> */}
       </form>
     );
   }

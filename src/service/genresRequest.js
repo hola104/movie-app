@@ -8,7 +8,7 @@ const genresRequest = () => {
   } catch (error) {
     console.log(error);
     // eslint-disable-next-line no-alert
-    alert(`Проверте подключение к vpn
+    alert(`Проверте подключение
     ${error}`);
   }
 };
