@@ -11,6 +11,7 @@ import getRequest from "../service/getRequest";
 import MoviesList from "./MovieList/MovieList";
 import Search from "./Search/Search";
 import { Provider } from "./GenresContext/genresContext";
+import Warning from "./Warning/Warning";
 
 // import apiDiscover from "../service/apiDiscover";
 export default class App extends Component {
@@ -53,15 +54,17 @@ export default class App extends Component {
   };
 
   searchMovie = (value) => {
-    this.setState(() => ({ loading: true }));
-    apiService(value).then((movies) => {
-      this.setState(() => ({
-        films: movies.results,
-        loading: false,
-        totalPage: movies.total_pages,
-        currentPage: 1,
-      }));
-    });
+    if (value) {
+      this.setState(() => ({ loading: true }));
+      apiService(value).then((movies) => {
+        this.setState(() => ({
+          films: movies.results,
+          loading: false,
+          totalPage: movies.total_pages,
+          currentPage: 1,
+        }));
+      });
+    }
   };
 
   nextPage = (value, page) => {
