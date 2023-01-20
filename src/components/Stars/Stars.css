@@ -8,3 +8,7 @@
   .ant-rate-star:not(:last-child) {
   margin-inline-end: 5px;
 }
+
+:where(.css-1jyprxx).ant-rate .ant-rate-star:not(:last-child) {
+  margin-inline-end: 5px;
+}
