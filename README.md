@@ -1,1 +1,1 @@
-https://movie-app-one-black.vercel.app/
+https://movie-app-psi-red.vercel.app/
