@@ -18,7 +18,7 @@ export default class Search extends Component {
         <Input
           type="search"
           className="search-input"
-          placeholder="Type to search..."
+          placeholder="Type to search...."
           onChange={this.onLabelChange}
           autoFocus
         />
