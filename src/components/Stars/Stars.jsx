@@ -25,6 +25,7 @@ export default class Stars extends Component {
 
   componentDidUpdate() {
     const { id } = this.props;
+    console.log(this.props);
     const { starValue } = this.state;
     if (id && starValue) {
       postRequest(id, starValue);

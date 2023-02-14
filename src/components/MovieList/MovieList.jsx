@@ -16,9 +16,9 @@ export default class MovieList extends Component {
         </div>
       );
     }
-    if (!loading && films && !films.length) {
-      return <Warning />;
-    }
+    // if (!loading && films && !films.length) {
+    //   return <Warning />;
+    // }
 
     if (films) {
       const filmsList = films.map((film) => {

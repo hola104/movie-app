@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import { format } from "date-fns";
+import { Image } from "antd";
 
 import Genre from "../Genre/Genre";
 import Stars from "../Stars/Stars";
 
-import Image from "./noposter.jpg";
+import noImage from "./noposter.jpg";
 import "./Card.css";
 
 export default class Card extends Component {
   _imgPath = "https://image.tmdb.org/t/p/w500";
   posterPath = (poster_path, availabilityPoster) =>
-    poster_path === null ? Image : availabilityPoster;
+    poster_path === null ? noImage : availabilityPoster;
 
   mainText = (text) => text.split(" ").slice(0, 29).join(" ");
 
@@ -49,7 +50,7 @@ export default class Card extends Component {
     return (
       <li className="card-container">
         <div className="card">
-          <img
+          <Image
             className="poster"
             src={this.posterPath(poster_path, availabilityPoster)}
             alt="poster"

@@ -7,10 +7,12 @@ import apiService from "../service/apiRequest";
 import genresRequest from "../service/genresRequest";
 import guestSessionRequest from "../service/guestSession";
 import getRequest from "../service/getRequest";
+import postRequest from "../service/postRequest";
 
 import MoviesList from "./MovieList/MovieList";
 import Search from "./Search/Search";
 import { Provider } from "./GenresContext/genresContext";
+
 // import Warning from "./Warning/Warning";
 
 // import apiDiscover from "../service/apiDiscover";
@@ -22,6 +24,7 @@ export default class App extends Component {
     totalPage: null,
     currentPage: 1,
     searchRequest: "",
+    filmsRated: [],
   };
 
   // componentDidMount(page) {
@@ -68,8 +71,24 @@ export default class App extends Component {
   };
 
   nextPage = (value, page) => {
+    console.log(value, "value");
+    console.log(page, "page");
     this.setState(() => ({ loading: true }));
     apiService(value, page).then((movies) => {
+      console.log(movies, "movies");
+      this.setState(() => ({
+        films: movies.results,
+        totalPage: movies.total_pages,
+        currentPage: movies.page,
+        loading: false,
+      }));
+    });
+  };
+  nextPageRated = (id, starValue) => {
+    postRequest(id, starValue).then((movies) => {
+      const res = movies.json();
+      console.log(res, "res");
+
       this.setState(() => ({
         films: movies.results,
         totalPage: movies.total_pages,
@@ -117,12 +136,12 @@ export default class App extends Component {
                       <Pagination
                         defaultCurrent={1}
                         current={currentPage}
-                        total={totalPage * 20}
+                        total={totalPage}
                         onChange={(value) =>
                           this.nextPage(searchRequest, value)
                         }
                         hideOnSinglePage
-                        pageSize={20}
+                        pageSize={2}
                         showSizeChanger={false}
                       />
                     </div>
@@ -152,6 +171,15 @@ export default class App extends Component {
             children: (
               <Provider value={genresMovies}>
                 <div className="movies-app">
+                  <Pagination
+                    defaultCurrent={1}
+                    current={currentPage}
+                    total={totalPage * 20}
+                    onChange={(value) => this.nextPageRated(value)}
+                    // hideOnSinglePage
+                    pageSize={20}
+                    showSizeChanger={false}
+                  />
                   <MoviesList films={ratedMovies} loading={loading} />
                 </div>
               </Provider>

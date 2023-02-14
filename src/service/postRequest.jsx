@@ -5,7 +5,7 @@ const postRequest = (id, starValue) => {
   const header = {
     value: starValue,
   };
-  localStorage.setItem(id, `${starValue}`);
+  // localStorage.setItem(id, `${starValue}`);
 
   const _url = `${_defaultPath}movie/${id}/rating?api_key=${_apiKey}&guest_session_id=${localStorage.getItem(
     "guest"

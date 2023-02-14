@@ -20,6 +20,12 @@
   cursor: pointer;
 }
 
+:where(.css-dev-only-do-not-override-1jyprxx).ant-image .ant-image-img {
+  width: auto;
+  height: auto;
+  vertical-align: middle;
+}
+
 .title {
   font-size: 17px;
   max-width: 180px;
